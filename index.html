@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Needle - Move the Needle</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    <div id="app">
+        <h1>Needle</h1>
+        <!-- Our app content will go here -->
+        <!-- Gauge Container -->
+        <canvas id="gaugeCanvas" width="300" height="250"></canvas>
+        <div>
+            <h2>Create a Needle (Goal)</h2>
+            <input type="text" id="needleName" placeholder="Enter Needle Name">
+            <button id="addNeedleBtn">Add Needle</button>
+        </div>
+        
+        <div>
+            <h2>Add Tasks to Needle</h2>
+            <select id="needleSelect"></select>
+            <input type="text" id="taskName" placeholder="Enter Task Name">
+            <button id="addTaskBtn">Add Task</button>
+        </div>
+        
+        <div>
+            <h2>Needle Progress</h2>
+            <ul id="taskList"></ul>
+        </div>
+    </div>
+    <!-- Include Gauge.js -->
+<script src="gauge.min.js"></script>
+<!-- Your existing script -->
+<script src="script.js"></script>
+</body>
+</html>
+
