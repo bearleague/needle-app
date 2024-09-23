@@ -4,26 +4,43 @@
     <meta charset="UTF-8">
     <title>Needle - Move the Needle</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <!-- Font Awesome CDN with Integrity and Crossorigin -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
 </head>
 <body>
     <div id="app">
-        <h1>Needle</h1>
-        <!-- Our app content will go here -->
+        <h1>Move the Needle</h1>
+        
+        <!-- Status Message Container -->
+        <div id="statusMessage" class="status-message">
+            <span id="statusText">This is a status message.</span>
+        </div>
+        
         <!-- Gauge Container -->
         <canvas id="gaugeCanvas" width="300" height="250"></canvas>
+        
         <div>
             <h2>Create a Needle (Goal)</h2>
             <input type="text" id="needleName" placeholder="Enter Needle Name">
-            <button id="addNeedleBtn">Add Needle</button>
+            <button id="addNeedleBtn" type="button">Add Needle</button>
         </div>
         
         <div>
             <h2>Add Tasks to Needle</h2>
-            <select id="needleSelect"></select>
+            <!-- Custom Dropdown for Needles -->
+            <div class="custom-dropdown" id="customDropdown">
+                <div class="dropdown-selected" id="dropdownSelected" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                    Select a Needle <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-list" id="dropdownList" role="listbox">
+                    <!-- Needle items will be dynamically inserted here -->
+                </div>
+            </div>
             <input type="text" id="taskName" placeholder="Enter Task Name">
-            <button id="addTaskBtn">Add Task</button>
+            <button id="addTaskBtn" type="button">Add Task</button>
         </div>
         
         <div>
@@ -31,10 +48,22 @@
             <ul id="taskList"></ul>
         </div>
     </div>
+    
+    <!-- Custom Confirmation Modal -->
+    <div id="confirmationModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+        <div class="modal-content">
+            <h3 id="modalTitle">Confirm Deletion</h3>
+            <p id="modalDescription">Are you sure you want to delete this needle and all its associated tasks?</p>
+            <div class="modal-buttons">
+                <button id="confirmDeleteBtn" class="btn confirm">Yes, Delete</button>
+                <button id="cancelDeleteBtn" class="btn cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
     <!-- Include Gauge.js -->
-<script src="gauge.min.js"></script>
-<!-- Your existing script -->
-<script src="script.js"></script>
+    <script src="gauge.min.js"></script>
+    <!-- Your existing script -->
+    <script src="script.js"></script>
 </body>
 </html>
-

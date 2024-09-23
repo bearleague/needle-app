@@ -1,21 +1,37 @@
+/* Apply box-sizing globally */
+* {
+    box-sizing: border-box;
+}
+
+/* General Styles */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 h1 {
     color: #333;
     text-align: center;
+    transition: color 0.3s;
+}
+
+h2 {
+    color: #333;
+    text-align: left;
+    font-size: 20px;
+    transition: color 0.3s;
 }
 
 #app {
-    max-width: 600px;
+    max-width: 500px;
     margin: 20px auto; /* Centers the container horizontally */
     padding: 20px;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 /* Center the gauge canvas */
@@ -24,49 +40,165 @@ h1 {
     margin: 0 auto;
 }
 
-/* Existing styles */
-
+/* Form Inputs and Buttons */
 input, select, button {
     padding: 10px;
-    margin: 5px;
+    margin: 5px 0; /* Vertical spacing */
     font-size: 16px;
+    display: block; /* Ensures elements take up the full width */
+    width: 100%; /* Makes elements responsive and aligned to the left */
 }
 
 button {
     cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
 }
 
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Custom Dropdown Styles */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.dropdown-selected {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-selected:hover, .dropdown-selected:focus {
+    background-color: #f0f0f0;
+}
+
+.dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-top: none;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+.dropdown-list .dropdown-item {
+    padding: 10px 15px; /* Increased horizontal padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.dropdown-list .dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.dropdown-list .dropdown-item .delete-needle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #ff4d4d; /* Red color */
+    font-size: 14px;
+}
+
+.dropdown-list .dropdown-item .delete-needle:hover {
+    color: #e60000;
+}
+
+/* Task List Styles */
 ul {
     list-style-type: none;
     padding: 0;
 }
 
 li {
-    background-color: #dddddd;
+    background-color: #f0f0f0;
     margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 10px 15px; /* Increased horizontal padding */
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s;
 }
 
 li:hover {
-    background-color: #c5c5c5;
+    background-color: #e3e3e3;
 }
 
+/* Task Info Container */
+li > div {
+    display: flex;
+    align-items: center;
+}
+
+/* Task Text */
+li span {
+    margin-left: 10px;
+    font-size: 16px;
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+/* Style for the check button */
+.check-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 32px; /* Match the delete button size */
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+    color: #399e51; /* Green color for the check icon */
+    font-size: 18px;
+}
+
+.check-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.check-btn:active {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the delete button */
 .delete-btn {
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
-    width: 32px; /* Adjust width to make it square */
-    height: 32px; /* Set height equal to width */
+    width: 32px; /* Ensure this matches the check button */
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 4px;
-    transition: background-color 0.2s;
-    color: #555; /* Icon color */
+    transition: background-color 0.2s, color 0.2s;
+    color: #656565; /* Gray color for the trash icon */
     font-size: 18px;
-    margin-left: 10px; /* Space between task text and delete button */
+    margin-left: 10px; /* Space between task info and delete button */
 }
 
 .delete-btn:hover {
@@ -77,4 +209,174 @@ li:hover {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+/* Ensure the delete icon inside the button is centered */
+.delete-btn i {
+    pointer-events: none; /* Ensure the icon doesn't capture the click */
+}
 
+/* Align icons within buttons */
+.check-btn i, .delete-btn i {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    #app {
+        padding: 20px;
+    }
+
+    input, select, button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .check-btn, .delete-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+    }
+
+    li span {
+        font-size: 14px;
+    }
+
+    /* Adjust Custom Dropdown Layout on Small Screens */
+    .custom-dropdown {
+        width: 100%;
+    }
+
+    .dropdown-selected {
+        width: 100%;
+    }
+}
+
+/* Status Message Styles - Updated for Overlay Alerts */
+.status-message {
+    position: fixed; /* Positions the alert relative to the viewport */
+    top: 20px; /* Distance from the top of the viewport */
+    right: 20px; /* Distance from the right of the viewport */
+    min-width: 250px; /* Ensures a minimum width for readability */
+    max-width: 300px; /* Limits the maximum width */
+    padding: 15px 20px; /* Adds padding for better aesthetics */
+    border-radius: 4px;
+    font-size: 16px;
+    color: #ffffff; /* Default text color */
+    display: none; /* Hidden by default */
+    opacity: 0; /* Fully transparent */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10000; /* Ensures the alert appears above other elements */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(-20px); /* Initial position above the viewport */
+
+    /* Flex layout for potential future additions */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-message.success {
+    background-color: #28a745; /* Green */
+}
+
+.status-message.error {
+    background-color: #dc3545; /* Red */
+}
+
+.status-message.info {
+    background-color: #17a2b8; /* Blue */
+}
+
+.status-message.show {
+    display: flex; /* Changed from block to flex */
+    opacity: 1;
+    transform: translateY(0); /* Slide into view */
+}
+
+.status-message.hide {
+    opacity: 0;
+    transform: translateY(-20px); /* Slide out of view */
+}
+
+/* Modal Backdrop */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2000; /* Sit on top of other elements */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; /* Center vertically */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 400px; /* Max width */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    animation: fadeIn 0.3s;
+}
+
+/* Modal Header */
+.modal-content h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* Modal Buttons Container */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.modal-buttons .btn {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.modal-buttons .btn.confirm {
+    background-color: #dc3545; /* Red */
+    color: #ffffff;
+}
+
+.modal-buttons .btn.confirm:hover {
+    background-color: #c82333;
+}
+
+.modal-buttons .btn.cancel {
+    background-color: #6c757d; /* Gray */
+    color: #ffffff;
+}
+
+.modal-buttons .btn.cancel:hover {
+    background-color: #5a6268;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade Out Animation */
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+}
