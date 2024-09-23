@@ -106,11 +106,6 @@ function loadNeedles() {
     }
 }
 
-// Initialize the app by loading needles
-document.addEventListener('DOMContentLoaded', () => {
-    loadNeedles();
-});
-
 /**
  * Updates the custom dropdown with the current list of needles.
  */
@@ -211,21 +206,6 @@ function closeDropdown() {
 }
 
 /**
- * Closes the dropdown when clicking outside of it.
- */
-window.addEventListener('click', function(event) {
-    const dropdown = document.getElementById('customDropdown');
-    if (!dropdown.contains(event.target)) {
-        closeDropdown();
-    }
-});
-
-/**
- * Event listener for toggling the dropdown when clicking on the selected area.
- */
-document.getElementById('dropdownSelected').addEventListener('click', toggleDropdown);
-
-/**
  * Adds a new needle to the list.
  */
 function addNeedle() {
@@ -255,20 +235,6 @@ function addNeedle() {
         showStatusMessage('Please enter a needle name.', 'error');
     }
 }
-
-// Event listener for adding a task when pressing 'Enter' key
-document.getElementById('taskName').addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // Prevent form submission
-        addTask();
-    }
-});
-
-// Event listener for the 'Add Task' button
-document.getElementById('addTaskBtn').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent form submission if the button is within a form
-    addTask();
-});
 
 /**
  * Adds a new task to the selected needle.
@@ -475,10 +441,50 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
+    // Initialize confirmationModal display to 'none' on DOMContentLoaded
+    confirmationModal.style.display = 'none';
 });
 
-// Initialize confirmationModal display to 'none' on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function() {
-    const confirmationModal = document.getElementById('confirmationModal');
-    confirmationModal.style.display = 'none';
+// *** Attach Event Listeners After DOM Loads ***
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize the app by loading needles
+    loadNeedles();
+
+    // Event listener for adding a needle when pressing 'Enter' key
+    const needleNameInput = document.getElementById('needleName');
+    needleNameInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission
+            addNeedle();
+        }
+    });
+
+    // Event listener for the 'Add Needle' button
+    const addNeedleBtn = document.getElementById('addNeedleBtn');
+    addNeedleBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent form submission if the button is within a form
+        addNeedle();
+    });
+
+    // Event listener for adding a task when pressing 'Enter' key
+    const taskNameInput = document.getElementById('taskName');
+    taskNameInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission
+            addTask();
+        }
+    });
+
+    // Event listener for the 'Add Task' button
+    const addTaskBtn = document.getElementById('addTaskBtn');
+    addTaskBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent form submission if the button is within a form
+        addTask();
+    });
+
+    // Event listener for toggling the dropdown when clicking on the selected area
+    const dropdownSelected = document.getElementById('dropdownSelected');
+    dropdownSelected.addEventListener('click', toggleDropdown);
 });
