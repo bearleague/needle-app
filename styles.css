@@ -90,11 +90,12 @@ button:disabled {
     right: 0;
     background-color: #ffffff;
     border: 1px solid #ccc;
-    border-top: none;
     max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
     display: none;
+    border-radius: 8px;
+    margin-top: 4px;
 }
 
 .dropdown-list .dropdown-item {
@@ -110,19 +111,6 @@ button:disabled {
     background-color: #f0f0f0;
 }
 
-.dropdown-list .dropdown-item .delete-needle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    color: #ff4d4d; /* Red color */
-    font-size: 14px;
-}
-
-.dropdown-list .dropdown-item .delete-needle:hover {
-    color: #e60000;
-}
-
 /* Task List Styles */
 ul {
     list-style-type: none;
@@ -131,14 +119,15 @@ ul {
 
 li {
     background-color: #f0f0f0;
-    margin: 5px 0;
-    padding: 10px 15px; /* Increased horizontal padding */
+    margin: 8px 0;
+    padding: 10px 15px;
     border-radius: 8px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
     transition: background-color 0.3s;
+    width: 100%; /* Ensure the task container spans the full width */
+    box-sizing: border-box; /* Makes padding and borders part of the width */
 }
 
 li:hover {
@@ -215,7 +204,7 @@ li span {
 }
 
 /* Align icons within buttons */
-.check-btn i, .delete-btn i {
+.delete-btn i, .check-btn i {
     display: block;
     text-align: center;
     width: 100%;
@@ -257,7 +246,7 @@ li span {
     position: fixed; /* Positions the alert relative to the viewport */
     top: 20px; /* Distance from the top of the viewport */
     right: 20px; /* Distance from the right of the viewport */
-    min-width: 250px; /* Ensures a minimum width for readability */
+    min-width: fit-content; /* Ensures a minimum width for readability */
     max-width: 300px; /* Limits the maximum width */
     padding: 15px 20px; /* Adds padding for better aesthetics */
     border-radius: 4px;
